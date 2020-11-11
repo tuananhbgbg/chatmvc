@@ -1,0 +1,88 @@
+﻿@{ Layout = "_Layout";}
+@using ChatMVC
+@model ChannelChat
+@Html.Partial("_nav")
+
+<div class="messaging">
+    <div class="inbox_msg">
+        <div class="inbox_people">
+            <div class="headind_srch">
+                <div class="recent_heading">
+                    <h4>Recent</h4>
+                </div>
+                <div class="srch_bar">
+                    <div class="stylish-input-group">
+                        <input type="text" class="search-bar" placeholder="Search">
+                        <span class="input-group-addon">
+                            <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @*Channel box*@
+            <div class="inbox_chat">
+                <div class="chat_list active_chat">
+                    <div class="chat_people">
+                        <div class="chat_img"> <img src="data:image/png;base64,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" alt="General"> </div>
+                        <div class="chat_ib">
+                            <h5>General Channel <span class="chat_date"></span></h5>
+                            <p>
+                                All green foxes are here
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="mesgs">
+            <div class="msg_history" id="msgBox">
+                @foreach (var message in Model.Messages)
+                {
+                    <div class="incoming_msg">
+                        <div class="incoming_msg_img" data-toggle="tooltip" data-placement="left" title=@message.Author?.UserName>
+                                <img src=@message.Author?.AvatarUrl alt=>
+                        </div>
+                        <div class="received_msg">
+                            <div class="received_withd_msg">
+                                <p>@message.Content</p>
+                                <span class="time_date">@message.Created.ToString("t")</span>
+                          
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="type_msg">
+                <div class="input_msg_write">
+                    <form action="/message" method="post">
+                        <input type="text" class="write_msg" placeholder="Type a message" name="content" />
+                        <button type="submit" class="msg_send_btn" ><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <p class="text-center top_spac"> Design by <a target="_blank" href="#">Sunil Rajput</a></p>
+
+</div>
+@*<div class="msgBox">
+        <div class="msgContent row">
+            @foreach (var message in Model.Messages)
+        {
+                <div class="row">
+                    <p>@message.Author.UserName: @message.Content</p>
+                </div>
+        }
+        </div>
+        <div class="repBox row">
+            <form action="/message" method="post">
+                <input type="text" value="" id="" name="content" />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>*@
+
+

@@ -1,0 +1,11 @@
+﻿@{ Layout = "_Layout";}
+@Html.Partial("_nav")
+<form action="/user/update" method="post">
+    <label for="username">New Username:</label>
+    <input type="text" value="" id="username" name="username" />
+    <br />
+    <label for="avatarurl">Avatar URL: </label>
+    <input type="text" value="" id="avatarurl" name="avatarurl" />
+    <br />
+    <button type="submit">Update</button>
+</form>
