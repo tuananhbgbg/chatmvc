@@ -18,7 +18,7 @@ namespace ChatMVC
         {
             services.AddControllersWithViews();
             services.AddHttpClient();
-            services.AddTransient<LoginService>();
+            services.AddSingleton<LoginService>();
             services.AddSingleton<MessageService>();
         }
 

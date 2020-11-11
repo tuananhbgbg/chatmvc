@@ -19,12 +19,16 @@ namespace ChatMVC
             httpClient = factory.CreateClient();
             httpClient.BaseAddress = new Uri("https://latest-chat.herokuapp.com");
         }
-        public void Register(string apikey)
+        public void LogIn(string apikey)
         {
             if (String.IsNullOrEmpty(HeaderApiKey()))
             {
                 httpClient.DefaultRequestHeaders.Add("apikey", apikey);
             }
+        }
+        public bool LogOut()
+        {
+            return httpClient.DefaultRequestHeaders.Remove("apikey");
         }
         public ChannelChat GetChannelAndMessages(int count)
         {
@@ -37,7 +41,7 @@ namespace ChatMVC
             var response = httpClient.PostAsync(endpoint, requestContent).Result;
             var responseContent = response.Content.ReadAsStringAsync().Result;
             var channelChat =  JsonConvert.DeserializeObject<ChannelChat>(responseContent);
-            channelChat.Messages = channelChat.Messages.OrderBy(m => m.Created).ToList();
+            channelChat.Messages = channelChat?.Messages.OrderBy(m => m.Created).ToList();
             return channelChat;
         }
         public string HeaderApiKey()

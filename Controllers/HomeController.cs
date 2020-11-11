@@ -27,7 +27,7 @@ namespace ChatMVC.Controllers
             {
                 return RedirectToAction("Index", "User");
             }
-            service.Register(apikey);
+            service.LogIn(apikey);
             var channel = service.GetChannelAndMessages(20);
             return View("Index",channel);
         }
@@ -36,6 +36,17 @@ namespace ChatMVC.Controllers
         {
             service.SendMsg(content);
             return RedirectToAction("Index", new { apikey = service.HeaderApiKey() });
+        }
+        [HttpGet("logout")]
+        public IActionResult LogOut()
+        {
+            if (service.LogOut())
+            {
+            return RedirectToAction("Logout", "User");
+            }
+            TempData["msg"] = "LogOut Failure";
+            return RedirectToAction("Index", new { apikey = service.HeaderApiKey(),hasMessage = true });
+
         }
     }
 }
